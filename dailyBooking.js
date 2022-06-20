@@ -1,4 +1,10 @@
 const dailyGL = document.querySelector(".dailyGL")
+const btnInsert = document.querySelector(".btnInsert")
+const btnBal = document.querySelector(".balance")
+const txtGL = document.querySelector(".txtGL")
+const numDr = document.querySelector(".numDr")
+const numCr = document.querySelector(".numCr")
+const txtMemo = document.querySelector(".txtMemo")
 
 // https://www.youtube.com/watch?v=-AR-6X_98rM
 const input = document.querySelector('input[type="file"]')
@@ -11,8 +17,6 @@ input.addEventListener('change',function(event){
         const lineAll = file.result.split(/\n/)
         console.log(lineAll)
         //用迴圈再次將Array的資料切開
-        var BalDr=0
-        var BalCr=0
         for(var i = 0;lineAll[i];i++){
             var lines = lineAll[i].split('|').map(function(line){
             return line.split(',')
@@ -29,22 +33,56 @@ input.addEventListener('change',function(event){
                 <td>${Dr}</td>
                 <td>${Cr}</td>
                 <td>${Memo}</td>
+                <td><button class="btnClose">X</button></td>
             </tr>`
-            dailyGL.insertAdjacentHTML("beforeend",oneline)
-
-            BalDr += Dr
-            BalCr += Cr
-            console.log(BalCr)             
+            dailyGL.insertAdjacentHTML("beforeend",oneline)      
         }
-            const balanceline = `<tr>
-            <td>Balance</td>
-            <td>${BalDr}</td>
-            <td>${BalCr}</td>
-            <td>Memo</td>
-            </tr>`
-
-        dailyGL.insertAdjacentHTML("beforeend",balanceline)
     }
     file.readAsText(input.files[0],'utf8'); 
 
 },false)
+
+// 建立Btn for Delete
+dailyGL.addEventListener("click",(e) =>{
+    if (e.target.nodeName === "BUTTON"){
+        e.target.parentNode.parentNode.remove()
+    }
+    
+})
+
+// 建立 Btn for Insert
+btnAddNewTesk.addEventListener("click",()=>{
+    createNewTask()
+})
+
+const createNewTask = ()=>{
+    const GL = txtGL.value
+    const Dr = numDr.value
+    const Cr = numCr.value
+    const Memo = txtMemo.value
+    const newTask = `<tr>
+    <td>${GL}</td>
+    <td>${Dr}</td>
+    <td>${Cr}</td>
+    <td>${Memo}</td>
+    <td><button class="btnClose">X</button></td>
+</tr>`
+
+    dailyGL.insertAdjacentHTML("beforeend",newTask)
+
+    // 將資料洗白
+    txtGL.value=""
+    numDr.value=""
+    numCr.value=""
+    txtMemo.value=""
+    txtGL.focus() // 重新放置文字箭頭
+
+}
+
+//當輸入enter時，即可直接插入
+
+
+//建立Btn for Balance check
+btnBal.addEventListener("click",(e)=>{
+
+})

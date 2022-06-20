@@ -14,6 +14,7 @@
     <input type="file" />
 
     <table class="dailyGL">
+
         <tr>
             <th class="GL">GL</th>
             <th class="Dr">Dr</th>
@@ -21,23 +22,27 @@
             <th class="Memo">Memo</th>
             <th > insert or delete</th>
         </tr>
+        <div>
+            <button id="btnAddNewTesk">新增GL</button>
+        </div>
 
         <tr>
-            <td><input type="text"></td>
-            <td><input type="number"></td>
-            <td><input type="number"></td>
-            <td><input type="text"></td>           
+            <td><input class="txtGL" type="text" placeholder="GL"></td>
+            <td><input class="numDr" type="number" placeholder="Dr"></td>
+            <td><input class="numCr" type="number" placeholder="Cr"></td>
+            <td><input class="txtMemo" type="text" placeholder="Memo"></td>
+                       
         </tr>
             
     </table>
 
     
-
-    <button>Export</button>
-    <button>Submit</button>
-
-
+    <button class="balance">Check Balance</button>
+    <button class="export">Export</button>
+    <button class="submit">Submit</button>
     <button>To Daily Checking</button>
+
+
 
 </body>
 </html>
