@@ -6,6 +6,7 @@ const numDr = document.querySelector(".numDr")
 const numCr = document.querySelector(".numCr")
 const txtMemo = document.querySelector(".txtMemo")
 
+
 // https://www.youtube.com/watch?v=-AR-6X_98rM
 const input = document.querySelector('input[type="file"]')
 input.addEventListener('change',function(event){
@@ -24,19 +25,21 @@ input.addEventListener('change',function(event){
              console.log(lines)
 
         // 數值逐一賦予給對應欄位，最後在整條交易插入
-            var GL =lines[0]
-            var Dr =parseInt(lines[1])
-            var Cr =parseInt(lines[2])
-            var Memo =lines[3]
-            var oneline = `<tr>
+            var GL =lines[3]
+            var Dr =parseInt(lines[6])
+            var Cr =parseInt(lines[7])
+            var Memo =lines[2]
+            //插入的整列是可以被搬動的
+            var oneline = `<tr draggable="true" class="dragGL"> 
                 <td>${GL}</td>
                 <td>${Dr}</td>
                 <td>${Cr}</td>
                 <td>${Memo}</td>
                 <td><button class="btnClose">X</button></td>
             </tr>`
-            dailyGL.insertAdjacentHTML("beforeend",oneline)      
+            dailyGL.insertAdjacentHTML("beforeend",oneline)                  
         }
+        
     }
     file.readAsText(input.files[0],'utf8'); 
 
@@ -53,6 +56,13 @@ dailyGL.addEventListener("click",(e) =>{
 // 建立 Btn for Insert
 btnAddNewTesk.addEventListener("click",()=>{
     createNewTask()
+})
+
+// 直接在Memo Input按Enter可以產生新資料
+txtMemo.addEventListener("keypress",(event)=>{
+    if (event.key ==="Enter"){
+        createNewTask()
+    }    
 })
 
 const createNewTask = ()=>{
@@ -79,10 +89,45 @@ const createNewTask = ()=>{
 
 }
 
-//當輸入enter時，即可直接插入
-
+// draggable and drop 使用
+//https://www.bing.com/videos/search?q=html+drag+and+drop&docid=608043399548048957&mid=5ECE2E1E90E977A1654B5ECE2E1E90E977A1654B&view=detail&FORM=VIRE
 
 //建立Btn for Balance check
-btnBal.addEventListener("click",(e)=>{
+btnBal.addEventListener("click",(e)=>{    
+
+    //moveGL()
+    //https://ithelp.ithome.com.tw/articles/10230686?sc=pt
+    //querySelector and getElement的差異
+    for (const dragGL of document.getElementsByClassName("dragGL")){
+        dragGL.addEventListener("dragstart",(e)=>{
+            e.dataTransfer.setData("text/plain", dragGL.className)
+            console.log(e)
+        })
+    }
+  
 
 })
+//JE6 的迴圈寫法~ for ... of
+// 命名 dropZone
+
+    for (const dropZone of document.querySelectorAll(".dropZone")){
+        
+        // when drag is over
+        dropZone.addEventListener("dragover",e=>{
+            e.preventDefault()
+            dropZone.classList.add("drop-zone--over")
+        })
+        
+        // when drag is drop
+        dropZone.addEventListener("drop",e=>{
+            e.preventDefault()
+            const droppedElementName = e.dataTransfer.getData("text/plain")
+            const droppedElement = document.getElementsByClassName(droppedElementName)
+            
+            //https://ithelp.ithome.com.tw/articles/10057106
+            dropZone.append(droppedElement[0])
+            
+            console.log(droppedElement)
+            console.log(typeof(droppedElement))
+        })
+    } 

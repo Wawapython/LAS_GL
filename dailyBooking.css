@@ -53,3 +53,7 @@ table {
 .dailyGL th, .dailyGL tr, .dailyGL td{
  border: 1px solid #000;
 }
+
+.drop-zone--over{
+	opacity: 0.5;
+}

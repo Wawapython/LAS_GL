@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="dailyBooking.css">
+    
+    
+</head>
+
+<body >
+    <button class="btnNew">addMore</button>
+    <table class="dailyGL"></table>
+    <div class="dropZone" style="border-color:blue"></div>
+    
+</body>
+
+<script>
+    const dailyGL = document.querySelector(".dailyGL")
+    const btnNew = document.querySelector(".btnNew")
+     
+    btnNew.addEventListener("click",()=>{
+        var oneline = `<tr draggable="true" class="dragGL"> 
+                            <td>${123}</td>
+                            <td>${456}</td>
+                        </tr>`
+        dailyGL.insertAdjacentHTML("beforeend",oneline)
+    })
+
+    const dragGL = document.querySelectorAll(".dragGL")
+    
+    dragGL.forEach(gl =>{
+
+        gl.addEventListener("click",(e)=>{
+        console.log("e")
+
+        //e.dataTransfer.setData("text/plain", dragGL.className)
+        })
+    })
+        
+    
+
+</script>
+
+</html>

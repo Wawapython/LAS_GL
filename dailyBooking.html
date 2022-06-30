@@ -9,24 +9,29 @@
     <script src="dailyBooking.js" defer></script>
 </head>
 <body>
-    <h1>Date</h1>
+    <time>Date</time>
 
     <input type="file" />
 
+    <div>
+        <button id="btnAddNewTesk">新增GL</button>
+    </div>
+
+    <div class="dropZone" style="border-color:blue">
+        <div id="myDraggableElement" draggable="true">OOOO</div>    
+    </div>
+
     <table class="dailyGL">
 
-        <tr>
+        <tr >
             <th class="GL">GL</th>
             <th class="Dr">Dr</th>
             <th class="Cr">Cr</th>
             <th class="Memo">Memo</th>
-            <th > insert or delete</th>
+            <th > Delete</th>
         </tr>
-        <div>
-            <button id="btnAddNewTesk">新增GL</button>
-        </div>
 
-        <tr>
+        <tr >
             <td><input class="txtGL" type="text" placeholder="GL"></td>
             <td><input class="numDr" type="number" placeholder="Dr"></td>
             <td><input class="numCr" type="number" placeholder="Cr"></td>
